@@ -43,7 +43,7 @@ src/
 ### 1️ Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/postsphere-frontend.git
+git clone https://github.com/moreashish23/MERN-Auth-Project-frontend.git
 cd postsphere-frontend
 2️⃣ Install dependencies
 npm install
