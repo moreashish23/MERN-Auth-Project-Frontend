@@ -1,75 +1,88 @@
-# React + TypeScript + Vite
+# PostSphere Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **React + Redux Toolkit** frontend for PostSphere — a full-stack MERN application that allows users to create, explore, and manage tech posts with authentication and authorization.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+##  Live Features
 
-## React Compiler
+-  User Authentication (Login / Signup)
+-  Email Verification (OTP)
+-  Create, Edit, Delete Posts
+-  Public Feed (Explore posts)
+-  User Dashboard (Manage posts)
+-  Responsive UI (Mobile → Desktop)
+-  Dark Theme UI
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
+##  Tech Stack
 
-## Expanding the ESLint configuration
+-  React (Vite)
+-  Redux Toolkit
+-  React Router DOM
+-  Tailwind CSS
+-  React Hot Toast
+-  Axios
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+src/
+├── api/ # Axios config
+├── app/ # Redux store
+├── features/
+│ ├── auth/ # Auth logic
+│ └── posts/ # Post CRUD logic
+├── components/ # Reusable UI components
+├── pages/ # Home, Login, Signup, Dashboard
+├── routes/ # Protected routes
+└── utils/ # Helpers
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+##  Setup & Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 1️ Clone the repository
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+```bash
+git clone https://github.com/YOUR_USERNAME/postsphere-frontend.git
+cd postsphere-frontend
+2️⃣ Install dependencies
+npm install
+3️⃣ Create .env file
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a .env file in the root directory:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+VITE_API_URL=http://localhost:5000/api
+4️⃣ Run the app
+npm run dev
+ Environment Variables
+Variable	Description
+VITE_API_URL	Backend API base URL
+🔄 API Integration
+
+The frontend connects to the backend using Axios:
+
+const API = import.meta.env.VITE_API_URL;
+
+📱 Responsive Design
+Device	Layout
+Mobile	1 column
+Tablet	2 columns
+Desktop	3 columns
+
+ UI Design
+Dark Theme (Tech UI)
+Tailwind CSS based
+Consistent card layout
+Smooth hover & focus states
+
+
+ Authentication Flow
+User Signup
+Verification Code Sent
+Verify Account
+Login
+JWT Token stored
+Protected Routes enabled
+
+
+## 📂 Project Structure
