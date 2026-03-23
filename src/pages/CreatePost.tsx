@@ -14,6 +14,8 @@ const CreatePost = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+      console.log("FORM WORKING");
+
     if (!form.title || !form.description) {
       toast.error("All fields required");
       return;
