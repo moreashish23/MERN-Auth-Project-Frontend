@@ -15,7 +15,7 @@ const Dashboard = () => {
     description: "",
   });
 
-  // ✅ DELETE
+  // DELETE
   const handleDelete = async (id: string) => {
     try {
       await dispatch(removePost(id)).unwrap();
@@ -25,7 +25,7 @@ const Dashboard = () => {
     }
   };
 
-  // ✅ START EDIT
+  // START EDIT
   const handleEdit = (post: any) => {
     setEditId(post._id);
     setEditForm({
@@ -34,7 +34,7 @@ const Dashboard = () => {
     });
   };
 
-  // ✅ SAVE EDIT
+  // SAVE EDIT
   const handleUpdate = async (id: string) => {
     try {
       await dispatch(editPost({ id, data: editForm })).unwrap();
@@ -54,7 +54,7 @@ const Dashboard = () => {
       
       {/* Title */}
       <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
-        📊 Your Dashboard
+        Your Dashboard
       </h1>
 
       {/* Create Post */}
@@ -73,7 +73,7 @@ const Dashboard = () => {
             className="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-md hover:bg-gray-800 transition"
           >
             
-            {/* ✏️ EDIT MODE */}
+            {/* EDIT MODE */}
             {editId === post._id ? (
               <div className="space-y-2">
                 <input
@@ -113,7 +113,7 @@ const Dashboard = () => {
               </div>
             ) : (
               <>
-                {/* 📄 NORMAL VIEW */}
+                {/* NORMAL VIEW */}
                 <h2 className="text-lg font-semibold text-blue-400">
                   {post.title}
                 </h2>
