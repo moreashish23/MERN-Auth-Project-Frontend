@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchPosts, createPost , deletePost, updatePost} from "./postAPI";
+import { fetchPosts, createPost, deletePost, updatePost } from "./postAPI";
 
 interface PostState {
   posts: any[];
@@ -11,21 +11,32 @@ const initialState: PostState = {
   loading: false,
 };
 
-// ✅ GET POSTS
 export const getPosts = createAsyncThunk(
   "posts/getPosts",
-  async (page: number) => {
-    const res = await fetchPosts(page);
-    return res.data.data;
+  async (page: number, { rejectWithValue }) => {
+    try {
+      const res = await fetchPosts(page);
+      return res.data.data;
+    } catch (err: any) {
+      return rejectWithValue(
+        err?.response?.data?.message || "Failed to fetch posts"
+      );
+    }
   }
 );
 
-// ✅ CREATE POST
+
 export const addPost = createAsyncThunk(
   "posts/addPost",
-  async (data: any) => {
-    const res = await createPost(data);
-    return res.data.data;
+  async (data: any, { rejectWithValue }) => {
+    try {
+      const res = await createPost(data);
+      return res.data.data;
+    } catch (err: any) {
+      return rejectWithValue(
+        err?.response?.data?.message || "Create failed"
+      );
+    }
   }
 );
 
@@ -37,11 +48,13 @@ export const removePost = createAsyncThunk(
       return id;
     } catch (err: any) {
       return rejectWithValue(
-        err?.response?.data?.message || "Delete failed Check you are authorized person or Not!"
+        err?.response?.data?.message ||
+          "Delete failed. Check authorization!"
       );
     }
   }
 );
+
 
 export const editPost = createAsyncThunk(
   "posts/editPost",
@@ -51,7 +64,8 @@ export const editPost = createAsyncThunk(
       return res.data.data;
     } catch (err: any) {
       return rejectWithValue(
-        err?.response?.data?.message || "Update failed Check you are authorized person or Not!"
+        err?.response?.data?.message ||
+          "Update failed. Check authorization!"
       );
     }
   }
@@ -64,6 +78,7 @@ const postSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
+      
       .addCase(getPosts.pending, (state) => {
         state.loading = true;
       })
@@ -71,22 +86,35 @@ const postSlice = createSlice({
         state.loading = false;
         state.posts = action.payload;
       })
+      .addCase(getPosts.rejected, (state) => {
+        state.loading = false;
+      })
 
+      
       .addCase(addPost.fulfilled, (state, action) => {
         state.posts.unshift(action.payload);
       })
+      .addCase(addPost.rejected, (state) => {
+        state.loading = false;
+      })
 
+      
       .addCase(removePost.fulfilled, (state, action) => {
         state.posts = state.posts.filter(
-            (post: any) => post._id !== action.payload
+          (post: any) => post._id !== action.payload
         );
       })
+      .addCase(removePost.rejected, (state) => {
+        state.loading = false;
+      })
+
+   
       .addCase(editPost.fulfilled, (state, action) => {
         state.posts = state.posts.map((post: any) =>
-            post._id === action.payload._id ? action.payload : post
+          post._id === action.payload._id ? action.payload : post
         );
       })
-      .addCase(editPost.rejected, (state, action: any) => {
+      .addCase(editPost.rejected, (state) => {
         state.loading = false;
       });
   },

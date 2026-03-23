@@ -15,15 +15,16 @@ const Dashboard = () => {
     description: "",
   });
 
-  // DELETE
   const handleDelete = async (id: string) => {
-    try {
-      await dispatch(removePost(id)).unwrap();
-      toast.success("Post deleted ");
-    } catch (err: any) {
-      toast.error(err?.message || "Delete failed");
-    }
-  };
+  try {
+    await dispatch(removePost(id)).unwrap();
+    toast.success("Post deleted ");
+  } catch (err: any) {
+    toast.error(
+      typeof err === "string" ? err : err?.message || "Delete failed"
+    );
+  }
+};
 
   // START EDIT
   const handleEdit = (post: any) => {
@@ -34,16 +35,17 @@ const Dashboard = () => {
     });
   };
 
-  // SAVE EDIT
   const handleUpdate = async (id: string) => {
-    try {
-      await dispatch(editPost({ id, data: editForm })).unwrap();
-      toast.success("Post updated ");
-      setEditId(null);
-    } catch (err: any) {
-      toast.error(err?.message || "Update failed");
-    }
-  };
+  try {
+    await dispatch(editPost({ id, data: editForm })).unwrap();
+    toast.success("Post updated ");
+    setEditId(null);
+  } catch (err: any) {
+    toast.error(
+      typeof err === "string" ? err : err?.message || "Update failed"
+    );
+  }
+};
 
   useEffect(() => {
     dispatch(getPosts(1));
