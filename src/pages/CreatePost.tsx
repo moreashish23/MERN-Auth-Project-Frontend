@@ -34,7 +34,7 @@ const CreatePost = () => {
       
       {/* Title */}
       <h2 className="text-lg sm:text-xl font-semibold text-white mb-4">
-        ✍️ Create New Post
+        Create New Post
       </h2>
 
       <form
@@ -69,7 +69,7 @@ const CreatePost = () => {
         <button
           className="w-full sm:w-fit bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-2 rounded-lg text-white font-medium hover:opacity-90 transition"
         >
-          🚀 Create Post
+          Create Post
         </button>
       </form>
     </div>
