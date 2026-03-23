@@ -37,7 +37,7 @@ export const removePost = createAsyncThunk(
       return id;
     } catch (err: any) {
       return rejectWithValue(
-        err?.response?.data?.message || "Delete failed"
+        err?.response?.data?.message || "Delete failed Check you are authorized person or Not!"
       );
     }
   }
@@ -51,7 +51,7 @@ export const editPost = createAsyncThunk(
       return res.data.data;
     } catch (err: any) {
       return rejectWithValue(
-        err?.response?.data?.message || "Update failed"
+        err?.response?.data?.message || "Update failed Check you are authorized person or Not!"
       );
     }
   }
