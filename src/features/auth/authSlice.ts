@@ -5,6 +5,8 @@ import {
   signupUser,
   sendVerificationCode,
   verifyCode,
+  sendForgotPasswordCode,
+  resetPassword,
 } from "./authAPI";
 import type { AuthState } from "./authTypes";
 
@@ -78,6 +80,31 @@ export const verifyUser = createAsyncThunk(
   }
 );
 
+// ✅ SEND FORGOT PASSWORD CODE
+export const sendForgotCode = createAsyncThunk(
+  "auth/sendForgotCode",
+  async (data: any, { rejectWithValue }) => {
+    try {
+      const res = await sendForgotPasswordCode(data);
+      return res.data;
+    } catch (err: any) {
+      return rejectWithValue(err?.response?.data?.message);
+    }
+  }
+);
+
+// ✅ RESET PASSWORD
+export const resetUserPassword = createAsyncThunk(
+  "auth/resetPassword",
+  async (data: any, { rejectWithValue }) => {
+    try {
+      const res = await resetPassword(data);
+      return res.data;
+    } catch (err: any) {
+      return rejectWithValue(err?.response?.data?.message);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -165,6 +192,31 @@ const authSlice = createSlice({
       })
 
       .addCase(verifyUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      .addCase(sendForgotCode.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(sendForgotCode.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(sendForgotCode.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+     
+      .addCase(resetUserPassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(resetUserPassword.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(resetUserPassword.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

@@ -11,3 +11,9 @@ export const sendVerificationCode = (data: any) =>
 
 export const verifyCode = (data: any) =>
   API.patch("/auth/verify-verification-code", data);
+
+export const sendForgotPasswordCode = (data: any) =>
+  API.patch("/auth/send-forgot-password-code", data);
+
+export const resetPassword = (data: any) =>
+  API.patch("/auth/verify-forgot-password-code", data);

@@ -74,6 +74,13 @@ const Login = () => {
         </button>
 
         <p
+          className="text-sm mt-2 text-blue-400 cursor-pointer"
+          onClick={() => navigate("/forgot-password")}
+        >
+          Forgot Password?
+        </p>
+
+        <p
           className="text-sm mt-3 text-center cursor-pointer text-blue-400 hover:text-blue-300 transition"
           onClick={() => navigate("/signup")}
         >
