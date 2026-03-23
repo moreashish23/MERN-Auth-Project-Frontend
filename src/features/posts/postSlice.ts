@@ -85,6 +85,9 @@ const postSlice = createSlice({
         state.posts = state.posts.map((post: any) =>
             post._id === action.payload._id ? action.payload : post
         );
+      })
+      .addCase(editPost.rejected, (state, action: any) => {
+        state.loading = false;
       });
   },
 });
