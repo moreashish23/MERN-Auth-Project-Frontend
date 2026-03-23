@@ -38,7 +38,7 @@ const Dashboard = () => {
   const handleUpdate = async (id: string) => {
     try {
       await dispatch(editPost({ id, data: editForm })).unwrap();
-      toast.success("Post updated ✏️");
+      toast.success("Post updated ");
       setEditId(null);
     } catch (err: any) {
       toast.error(err?.message || "Update failed");

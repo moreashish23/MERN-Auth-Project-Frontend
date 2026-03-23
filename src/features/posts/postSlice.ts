@@ -45,9 +45,15 @@ export const removePost = createAsyncThunk(
 
 export const editPost = createAsyncThunk(
   "posts/editPost",
-  async ({ id, data }: any) => {
-    const res = await updatePost(id, data);
-    return res.data.data;
+  async ({ id, data }: any, { rejectWithValue }) => {
+    try {
+      const res = await updatePost(id, data);
+      return res.data.data;
+    } catch (err: any) {
+      return rejectWithValue(
+        err?.response?.data?.message || "Update failed"
+      );
+    }
   }
 );
 
