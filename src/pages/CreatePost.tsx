@@ -27,8 +27,12 @@ const CreatePost = () => {
 
       setForm({ title: "", description: "" });
     } catch (err: any) {
-      toast.error(err?.message || "Something went wrong");
-    }
+        toast.error(
+          typeof err === "string"
+            ? err
+            : err?.message || "Something went wrong"
+        );
+      }
   };
 
   return (
