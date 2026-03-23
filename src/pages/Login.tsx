@@ -32,7 +32,7 @@ const Login = () => {
   useEffect(() => {
     if (isAuthenticated) {
       toast.success("Login Successful ");
-      navigate("/");
+      navigate("/dashboard");
     }
   }, [isAuthenticated]);
 
