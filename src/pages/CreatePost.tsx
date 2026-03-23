@@ -21,7 +21,7 @@ const CreatePost = () => {
 
     try {
       await dispatch(addPost(form)).unwrap();
-      toast.success("Post created 🚀");
+      toast.success("Post created ");
 
       setForm({ title: "", description: "" });
     } catch (err: any) {

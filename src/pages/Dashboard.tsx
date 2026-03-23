@@ -19,7 +19,7 @@ const Dashboard = () => {
   const handleDelete = async (id: string) => {
     try {
       await dispatch(removePost(id)).unwrap();
-      toast.success("Post deleted 🗑️");
+      toast.success("Post deleted ");
     } catch (err: any) {
       toast.error(err?.message || "Delete failed");
     }
