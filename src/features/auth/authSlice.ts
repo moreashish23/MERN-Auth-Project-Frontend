@@ -9,16 +9,15 @@ import {
   resetPassword,
 } from "./authAPI";
 import type { AuthState } from "./authTypes";
+import { jwtDecode } from "jwt-decode";
 
 const token = localStorage.getItem("token");
 
+const decoded: any = token ? jwtDecode(token) : null;
 
 const initialState: AuthState = {
-  user: token
-    ? {
-        email: "",
-        verified: true,
-      }
+  user: decoded
+    ? { email: decoded.email, verified: decoded.verified }
     : null,
   isAuthenticated: !!token,
   loading: false,

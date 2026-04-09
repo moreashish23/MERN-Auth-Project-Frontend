@@ -3,6 +3,7 @@ import { logoutState } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import type { RootState } from "../app/store";
 import { useState } from "react";
+import API from "../api/axios";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,10 @@ const Navbar = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await API.post("/auth/signout");
+    } catch (_) {}
     dispatch(logoutState());
     navigate("/login");
   };

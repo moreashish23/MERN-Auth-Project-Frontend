@@ -13,31 +13,31 @@ const Login = () => {
     (state: RootState) => state.auth
   );
 
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [justLoggedIn, setJustLoggedIn] = useState(false);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
     if (!form.email || !form.password) {
-      toast.error("All fields are required");
+      toast.error("Please enter your email and password");
       return;
     }
 
+    setJustLoggedIn(true);
     dispatch(login(form));
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      toast.success("Login Successful ");
+    if (isAuthenticated && justLoggedIn) {
+      toast.success("Welcome back! Logged in successfully");
       navigate("/dashboard");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, justLoggedIn]);
 
   useEffect(() => {
     if (error) {
+      // error comes directly from backend — already meaningful
       toast.error(error);
     }
   }, [error]);
@@ -70,11 +70,11 @@ const Login = () => {
           className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition disabled:opacity-50"
           disabled={loading}
         >
-          {loading ? "Loading..." : "Login"}
+          {loading ? "Logging in..." : "Login"}
         </button>
 
         <p
-          className="text-sm mt-2 text-blue-400 cursor-pointer"
+          className="text-sm mt-2 text-blue-400 cursor-pointer hover:text-blue-300"
           onClick={() => navigate("/forgot-password")}
         >
           Forgot Password?
@@ -84,7 +84,7 @@ const Login = () => {
           className="text-sm mt-3 text-center cursor-pointer text-blue-400 hover:text-blue-300 transition"
           onClick={() => navigate("/signup")}
         >
-          Don't have an account? Signup
+          Don't have an account? Sign up
         </p>
       </form>
     </div>
