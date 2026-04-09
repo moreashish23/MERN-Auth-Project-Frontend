@@ -4,8 +4,6 @@ import { signup, sendCode } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-// const passwordHint =
-//   "Min 8 chars · uppercase · lowercase · number · special character\nExample: User@1234";
 
 const Signup = () => {
   const dispatch = useDispatch<any>();
